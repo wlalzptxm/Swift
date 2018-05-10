@@ -1,0 +1,205 @@
+#Simple Values(변수와 상수)
+
+let은 상수, var는 변수를 만들고 쓰게 해준다. 상수는 컴파일 시간을 더이상 알 필요가 없을때 사용하지만, 한번은 정확히 지정해주어야 한다 이 말은 상수를 사용하여 값에 이름을 지정할 수 있다는 말이다. 한번 결정하지만 많은 곳에 사용 할 수 있다.
+
+
+	1 var myVariable = 42
+	2 myVariable = 50
+	3 let myConstant = 42
+
+
+상수나 변수는 할당하려는 값과 동일한 타입이어야 한다. 그런데 항상 명시적으로 타입을 작성할 필요가 없다. 상수 또는 변수를 만들때 값을 제공하면 컴파일러에서 유형을 유추할 수 있다. 위의 예시에서 컴파일러는 'myVariable' 이 정수형일거라고 유추한다 왜냐하면 초기의 값이 정수였기 때문이다.
+
+만약에 초기값이 충분한 정보없이 제공된다면(또는 초기값이 없다면), 변수 앞에 콜론(:)으로 구분하여 명시적으로 작성되어야 할것이다
+
+
+	1 let implicitInteger = 70
+	2 let implicitDouble = 70.0
+	3 let explicitDouble: Double = 70
+
+	EXPERIMENT
+	상수를 한개의 명시적 타입 flaot 4로 생성해보자
+
+	$ let explictFlaot: flaot = 4
+
+
+값은 절대로 암시적으로 다른 타입으로 바뀌지 않는다. 만약에 값을 다른 유형으로 컨버트 해야하는 경우. 한개의 인스턴스안에 명시적으로 원하는 타입을 만든다.
+
+
+	1 let label = "The width is"
+	2 let width = 94
+	3 let widthLabel = label + String(width)
+
+	EXPERIMENT
+	마지막줄의 String을 바꾸거나 지우려고 시도한다면 어떤 에러를 얻을수 있나?
+
+
+string에 값을 포함하는 더 쉬운 방법이 있다. 괄호안에 값을 쓰고 괄호전에 backslash(\)를 쓰는 것이다.
+
+	1 let apples = 3
+	2 let oranges = 5
+	3 let appleSummary = "i have \(apples) apples."
+	4 let fruitSummary = "i have \(apples + oranges) pieces of fruit"
+
+	EXPERIMENT
+	문자열을 포함한 부동소수점 계산기에 \() 쓰자 그리고 누군가 이름안에 인삿말을 포함하자
+	Use \() to include a floating-point calculation in a string and to include someone's name in a greeting
+
+	$ let grapes = 4
+	$ let banana = 4
+	$ let grapesSummary = "i have \(grapes) grapes."
+	$ let fruitSummary = "i have \(grapes + banana) pieces of fruit."
+	$ let humanname = "hoony"
+	$ let sayHello = "hello mister \(humanname)."
+
+
+여러 줄을 차지하는 문자열에는 3개의 따옴표(""") 써라, 묶인 줄의 시작과 끝에 따옴표가 있는 동안에는 들여쓰기가 제거 됩니다. 예를 보죠
+
+
+	1 let quotation = """
+	2 I said "I have\(apples) apples."
+	3 And then I said "I have \(apples + oranges) pieces of fruit."
+	4 """
+
+
+브라켓([])을 사용하여 배열과 사전형을 만들고 index나 key를 작성하여 요소 참조한다. 콤마comma(,)는 마지막 요소에 쓰기로 동의한다
+
+
+	1 var shoopingList = ["catfish", "water", "tulips", "blue paint"]
+	2 shoopingList[1] = "bottle of water"
+	3
+	4 var occupation = [
+	5    "Malcolm" : "Captain",
+	6    "Kaylee" : "Mechanin",
+	7 ]
+	8 occupation["Jayne"] = "Public Relations"
+
+빈 배열이나 사전형을 만들려면 구문을 초기화 시킨다
+
+	1 let emptyArray = [String]()
+	2 let emptyDictionary = [String: Float]()
+
+만약 타입의 정보를 추론할수 있다면 빈 배열에 []와 빈 사전형에 [:] 쓸 수 있다 - 예를들어, 변수에 새로운 값을 지정할때나 함수에 인자를 전달할때
+
+	1 shoopingList = []
+	2 occupation = [:]
+
+
+
+#Control Flow(제어흐름)
+
+Swift로 조건문을 만들어 쓴다면 그리고 for-in, while, repeat-while 같은 반목문을 쓴다면, if문이나 for문 주변에 괄호를 치는건 선택사항일 것이고, 중괄호 안에 바디가 들어가는 것은 필수적 사항일 것이다. 
+
+	1 let individualScores = [75, 43, 103, 87, 12]
+	2 var teamScore = 0
+	3 for score in individualScores {
+	4	if score > 50 {
+	5		teamScore += 3
+	6	} else {
+	7		teamScore += 1
+	8	}
+	9  }
+	10 print(teamScore)
+
+만약 if문이라면, Boolean문을 쓸수밖에 없다. 이말은 이러한 코드는 if score {...} 에러라는 뜻이다. 또한 암시적으로 0과 비교할수 없다.
+
+당신은 if문이나 let(상수)를 활용하여 누락된 값을 처리할 수 있을것이다.그 값들은 선택적 사항이겠지만 선택적인 한개의 값은 그 값을 포함하거나 nil값을 포함하게 된다. 값의 유형뒤에 ?마크를 붙여 값을 선택적으로 표시한다
+
+
+	1 var optionalString: String? = "Hello"
+	2 print(optinalString == nil)
+	3 
+	4 var optionalName: String? = "John Appleseed"
+	5 var greeting = "Hello!"
+	6 if let name = optionalName {
+	7	greeting = "Hello, \(name)"
+	8 }
+
+	EXPERIMENT
+	optionalName의 값을 nil로 바꾸어보자, greeting으로 뭘 얻을수있나? else를 붙여 if optionalName is nil이라는 문구를 만들고 다른 변수가 나올수있게끔 셋팅한다
+
+	$ var optionalName: String? = nil
+	$ var greeting = "Hello!"
+	$ if let name = optionalName {
+	$	greeting = "Hello, \(name)"
+	$ } else optionalName == nil {
+	$	greeting = "Hello, \(name)"
+	$ }
+
+만약에 선택적 값이 nil이라면 조건부는 false이고 중괄호 안에 코드는 건너뜁니다. 그렇지 않다면, 선택적 값은 상수가 할당된 뒤에 언랩핑이 되고, 언랩핑이 되었다는 말은 중괄호 안에 코드가 사용가능하다는 뜻이다
+
+다른 방법으로는 ??를 써서 선택값에 기본값을 제공하는 조작법이다. 만약 선택값이 누락되었다면 기본값으로 대체한다
+
+
+	1 let nickName: String? = nil
+	2 let fullName: String = "John Applesseed"
+	3 let informalGreeting = "Hi \(nickName ?? fullName)"
+
+스위치문은 모든 종류의 데이터나 비교 연산을 지원합니다 - 정수나 논리연산에 국한되지 않는다
+
+	1 let vegetable = "red pepper"
+	2 switch vegetable {
+	3 case "celery":
+	4    	print("Add some raisins and make ants on a log.")
+	5 case "cucumber", "watercress":
+    	6	print("That would make a good tea sandwich.")
+	7 case let x where x.hasSuffix("pepper"):
+    	8	print("Is it a spicy \(x)?")
+	9 default:
+    	10	print("Everything tastes good in soup.")
+	11 }
+
+	EXPERIMENT
+	기본 케이스를 삭제해보자 어떤 에러가 뜨는가?
+
+let이 패턴에 사용 된 패턴에 일치하는 값을 상수에 할당하는 방법에 대해 주목하자
+
+코드의 내부에서 스위치문을 실행한 후 프로그램은 스위치문에서 종료한다. 실행은 다음 케이스문에서 계속되어지지 않아, 따라서 각 코드의 끝에서 스위치문을 명시적으로 빠져나갈 필요가 없다.
+
+제공된 이름의 쌍과 쓰여진 각각의 키값의 쌍으로 이루어진 딕셔너리문의 안에 반복된 항목에 대해 for -in문을 쓴다면 딕셔너리문은 순서가 없는 컬렉션이 되고 그 키값들은 임의의 순서로 반복될 것이다
+
+	1 let interestNumbers = [
+	2	"Prime": [2, 3, 5, 7, 11, 13],
+	3	"Fibonacci": [1, 1, 2, 3, 5, 8],
+	4	"Square": [1, 4, 9, 16, 25]
+	5 ]
+	6 var largest = 0
+	7 for (kind, numbers) in interestingNumbers {
+	8	for number in numbers {
+	9		if number > largest {
+	10			largest = number
+	11		}
+	12	}
+	13 }
+	14 print(largest)
+
+	EXPERIMENT
+	어떤 숫자가 가장 컷었는지 추적하는 또 다른 변수를 추가하자, 그 가장 큰 숫자는 무었이었습니까?
+	Add another variable to keep track of which kind of number was the largest, as well as what that largest number was
+
+
+while문을 써서 조건이 변경될때까지 반복해서 막는 코드를 사용해보자 조건은 끝날때까지 반복하는 대신 반드시 마지막에 한번 실행되어야 한다
+
+	1 var n = 2
+	2 while n < 100 {
+	3	n += 2
+	4 }
+	5 print(n)
+	6
+	7 var m = 2
+	8 repeat {
+	9	m += 2
+	10 } while m < 100
+	11 print(m)
+
+
+순서를 지키며 반복 사용 할 수 있을 것이다. < 지수의 범위를 만들수 있다
+
+	1 var total = 0
+	2 for i in 0..<4 {
+	3	total += i
+	4 }
+	5 print(total)
+
+Use .. < 상위 값을 생략하고 범위를 만든다 ... 두 값을 모두 포함하는 범위를 만든다
+Use .. < to make a range that omits its upper value and use ...
