@@ -1,0 +1,127 @@
+#Funtions and Colosures(함수와 클로저)
+
+func를 써서 함수를 선언한다. 괄호안에 있는 요소의 목록에 따라 함수를 호출한다, 
+Use -> 함수의 return 으로부터 매개변수 이름과 타입은 따로 분리된다
+
+	1 func greet(person: String, day: String) -> String {
+	2	return "Hello \(person), today is \(day)."
+	3 }
+	4 greet(person: "Bob", day: "Tuesday")
+
+	????
+
+	1 func greet(person: "Bob", day: "Tuesday") -> String {
+	2	return "Hello \(person), today is \(day)."
+	3 }
+
+!!	이렇게 하면 어케됨?
+
+	EXPERIMENT
+	day 매개 변수를 없애고 today's lunch special in the greeting 매개변수를 추가하자
+
+	4 greet(person: "Bob", day : "lunch special in the greeting")
+
+
+기본적으로, 함수는 그 요소를 위한 매개변수의 이름표처럼 사용할 수 있다.
+요소에 관형적으로 이름표를 붙이기 전에 매게변수의 이름 혹은 작성(요소에 이름표를 쓰지 않기위해) 한다.
+
+	1 func greet(_ person: String, on day: String) -> String {
+	2	return "Hello \(person), today is \(day)."
+	3 }
+	4 greet( "John", on : "Wednesday")
+
+
+compound value(복합가치...)를 만들기 위해 튜플을 쓴다 예를 들어, 함수로부터 여러가지 값을 반환하기 위해서. 튜플의 요소는 이름이나 숫자로 이를 참조할 수 있다.
+
+	1 func calculateStatistics(scores: [int]) -> (min:Int, max:Int, sum:Int) {
+	2	var min = scores[0]
+	3	var max = scores[0]
+	4	var sum = 0
+	5
+	6	for score in scores {
+	7		if score > max {
+	8			max = socre
+	9		} else if score < min {
+	10			min = score
+	11		}
+	12		sum += score
+	13	}
+	14
+	15	return (min, max, sum)
+	16 }
+	17 let statistics = calculateStatistics(scores : [5, 3, 100, 3, 9])
+	18 print(statistics.sum)
+	19 print(statistics.2)
+
+!!	이거 개궁금하다. 튜플 5, 3, 100, 3, 9를 for 문과 if써서 분류한다음에 statistics에 담아서 프린트 하는건데
+	왜 뒤에 .sum과 .2가 붙을까..
+
+함수는 중첩될 수 있다. 중첩된 함수는 외부함수에서 선언된 변수에 접속할 수 있고 중첩된 함수를 사용하여 길거나 복잡한 함수에서 코드를 구성 할 수 있다
+
+	1 func retrunFifteen() -> Int {
+	2	var y = 10
+	3	func add() {
+	4		y += 5
+	5	}
+	6	add()
+	7	return y
+	8 }
+	9 return Fifteen()
+
+함수는 첫번째 클래스-타입 그러니까 다른 함수의 값을 return할수 있다는 말이다.
+
+	1 func makeIncrementer() -> ((Int) -> Int) {
+	2	func addOne(Number: Int) -> Int {
+	3		return 1 + number
+	4	}
+	5	retrun addOne
+	6 }
+	7 var increament = makeIncrementer()
+	8 increment(7)
+
+
+함수는 요소 중 하나로 다른 함수의 값을 받을 수 있다
+
+	1 func hasAnyMatches(list: [Int], condition: (Int) -> Bool) -> Bool {
+	2	for item in list {
+	3		if condition(item) {
+	4			return true
+	5		}
+	6	}
+	7	return false
+	8 }
+	9 func lessThanTen(number: Int) -> Bool {
+	10	return number < 10
+	11 }
+	12 var numbers = [20, 19, 7, 12]
+	13 hasAnyMatches(list: numbers, condition: lessThanTen)
+
+
+폐쇄적 함수들이 실제로 특별한 경우 : 나중에 또 호출 할수있기 때문(blocks of code that can be called later) 클로저의 코드는 클로저가 실행될 때 다른 범위에 있더라도 작성된 범위에서 사용 가능한 변수나 함수와 같은 것을 엑서스 할 수 있다. - 당신은 이미 만들어진 중첩메소드에서 예시를 보았다. 또 코딩이 있는 중괄호({})에 어떤 이름없이 작성할 수 있다
+
+	1 number.map({ (number: Int) -> Int in
+	2	let result = 3 * number
+	3	return result
+	4 })
+
+	EXPERIMENT
+	모든 홀수에 대해 0을 반환하게 재작성해보자
+
+
+더 간결하게 클로져 하기 위한 몇가지 선택지가 있다. 이미 어떤 형태인지 알고 있는 경우 그것의 매개변수나 리턴 타입 혹은 둘다(을)를 누락시킬 수 있고 한가지 명령문의 클로져는 암시적으로 그것들의 유일한 명령문의 값을 반환한다
+
+	1 let mappedNumbers = numbers.map({ number in 3 * number })
+	2 print(mappedNumbers)
+
+당신은 매개변수에 숫자 대신 어떤 이름으로 알아내게 할수 있다. - 이 접근법은 특별히 굉장히 짧은 클로져를 만들기에 유용하다. 클로져는 마지막 함수의 인수 괄호 앞에 통과하며 즉각적으로 나타낸다. 클로저는 함수의 괄호안에 있는 모든 인수를 누락시킬수 있다.
+	
+	1 let sortedNumbers = numbers.sorted { $0 > $1 }
+	2 print(sortedNumbers)
+
+
+
+
+
+
+
+
