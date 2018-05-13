@@ -1,0 +1,112 @@
+#Closure
+
+클로저란 코드의 블럭이자, 코드의 묶음이라고 정의내릴수 있다
+Objective - c와의 차이점은 swift에서는 closure가 완벽한 일급객체로서 행위를 취할수 있다는점이다.
+- 전달인자, 변수, 상수 등으로 할당가능, 다른 함수에서 인자로 쓸수있음
+
+1) 매개변수, 반환 타입 생략가능
+2) return 키워드 생략가능
+3) 축약된 전달인자 이름 사용 가능
+4) 후행 클로져
+
+{ (매개 변수들) -> 반환 타입 in < in을 쓰는 이유 정의부와 실행부를 분리하기 위해
+				  파라미터(매개 변수)가 없으면 생략가능
+	코드
+}
+
+# 클로저가 많이 쓰이는 경우
+
+함수에 파라미터가 들어가는 경우
+
+재귀함수를 쓰게 될때
+
+#Cocoa Touch의 클로저
+
+앞에 매개 변수가 없는 경우에 in 키워드도 생략 가능하다. UIAlertAction에서 많이 볼수 있다.
+
+	1 let action = UIAlertAction(title: String?, style: ULAlerActionStyle, handler ((UIAlerAction) -> Void)?)
+	2
+	3 let action = UIAlertAction(title:"OK", style: .default) {
+	4	(UIAlertAction) in
+	5	//codes
+	6 }
+	7
+	8 let action = UlAlerAction(title:"OK", style: .default) {
+	9	(action) in
+	10 }
+
+
+#매개 변수, 반환 타입 생략 가능
+
+클로저는 함수의 매개변수로 넘어가는 용도로 가장 많이 쓰이게된다
+
+	1 func sorted(by areInIncreasingOrder: (E, E) -> Bool) -> [E]
+	2	// (Type, Type) -> Type
+
+Swift 표준 라이브러리의 sorted를 예로 , Type과 Type을 가지고 Type을 반환해주는 형태의 함수로 클로저를 받는다
+
+	1 func backwards(left: String, right: String) -> Bool {
+	2	print("(left)(right) 비교중")
+	3	return left > right
+	4 }
+	5
+	6 let names: [String] = ["hana", eric", "yacom", "kim"]
+	7 let reversed: [String] = names.sorted(by: backwards) print(reversed)
+
+비교군에서 왼쪽이 크게 되면 왼쪽이 먼저 나오는 함수, 근데 왜 안if? , 함수를 넘겼지만 동작하는 이유가 함수는 클로저의 일조이기 때문, 하지만 이처럼 함수를 미리 만들어두고 쓰는 경우는 드무므로 클로저로 넘김
+
+	1 let reversed : [String]
+	2
+	3 reversed = names.sorted (by: { left: String, right:
+	4 String) -> Bool in
+	5	return left > righ})
+	6	print(reversed) // ["yagom", "kim", "hana", "eric"]
+
+형태는 유사하지만 이름없는 클로저가 안쪽으로 들어오는 것을 볼 수 있다. in 키워드로 정의부와 실행부로 나누고 반환한다
+
+	1 //후행클로저(Trailing Closure) 사용
+	2 let reversed: [String] = name.sorted() {(left:String,
+	3 right: String) -> Bool in
+	4	return left > right
+	5 }
+	6
+	7
+	8 // sorted(by:) 메소드의 소괄호까지 생략가능
+	9 let reversed: [String] = name.sorted {(left:String,
+	10 right: String) -> Bool in
+	11	return left > right
+	12 }
+
+어떤 함수나 메소드의 맨 마지막으로 클로저를 받아오면 중첩되는 괄호를 생략해서 위 예제의 후행클로저와 같은 모습으로 바뀌게 됩니다. 또한 메소드의 소괄호까지도 생략할 수 있습니다.
+
+
+#매개 변수 타입과 반환 타입 생략 가능
+	
+	1 //클로저의 매개 변수 타입과 반환 타입을 생략
+	2 let reversed: [String] = name.sorted {(left, right) in
+	3 	return left > right
+	4 }
+
+클로저의 매개 변수 타입과 반환 타입을 생략해서 표현할 수 있다. sorted라는 메서드에서 타입을 알고 있기 때문
+
+# return 키워드 생략 및 축약된 전달 인자 이름 사용 가능
+
+	1 // 단축 인자 이름 사용
+	2 let reversed: [String] = names.sorted {
+	3	return $0 > $1
+	4 }
+	5
+	6 // 암시적 반환 표현 사용
+	7 let reversed: [String] = names.sorted { $0 > $1 }
+
+앞서 left, right로 지정했던 매개 변수 이름도 생략하고 단축 인자를 사용할 수 있다. 내부의 한줄만 있다면 return 키워드 없어도 반환 타입이 된다. 이 원리를 안다면 외부 라이브러리에 $0,$1이 나오더라도 하나씩 풀어서 보면 이해가 간다. 협업에서는 생략을 적당히!
+
+
+
+
+
+
+
+
+		
+
