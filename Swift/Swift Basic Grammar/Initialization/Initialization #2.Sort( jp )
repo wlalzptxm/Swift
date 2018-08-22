@@ -4,7 +4,6 @@ Initialization #種類
 
 1.キーワードrequiredとともにinitを表示できる。この言葉は子クラスは必ずこのinitを実行しなければならないという意味そして規則に従うなら、
 相続も可能である無条件に実行しなければならない。必須である
-
 - 例えば、UIViewのような場合、requiredinitがある
 
 # Failableinit(失敗することができる初期化関数)
