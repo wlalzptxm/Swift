@@ -1,0 +1,12 @@
+Array #３.Reduce
+
+１. ReduceはArrayを一つの結果に減らすことができる。つまり、数字を加えるという意味だ。今までしたのに次の要素を追加して番号を加えていく、とりわけreduceはinitialとクルロ
+ジョ二つの因子を持っている特徴を持つが、
+
+- { $0 + $1 } はクルロジョ、reduce(0)の'0'はinitialを意味する。
+- ここでもクルロジョが小括弧の外に出ている。
+
+reduce(initial: U, combine: (U, T) -> U) -> U
+Let sum: Int = [1,2,3].reduce(0) { $0 + $1 } //adds up the numbers in the Array
+
+- { $0 + $1 } トレーラークルロジョとよぶ
