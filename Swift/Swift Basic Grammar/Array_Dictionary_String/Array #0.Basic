@@ -1,0 +1,18 @@
+Array #0.表現式
+
+1.基礎
+
+Var a = Array<String>()		== 		Var a = [String]()
+
+- 因子のない初期化基本型
+
+Var animals = [“Giraffe”, “Cow”, “Doggie”, “Bird”]
+Animals.append(“Ostrich”)
+Var animal = animals[5]
+
+//enumerating an Array 一つずつ出力
+For animal in animals {
+	print(“\(animal)”)
+}
+
+- for - in 構文を利用して enumerating
