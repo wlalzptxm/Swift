@@ -1,0 +1,29 @@
+Extension #1.基礎
+
+extension UIViewController: UIViewController {
+		if let navcon = self as? UINavigationController {
+			return navcon.visibleViewController
+		} else {
+			return self
+		}
+	}
+}
+>>
+extension UIViewController: UIViewController {
+	var contentViewController: UIViewController {
+		if let navcon = self as? UINavigationController {
+			return navcon.visibleViewController
+		} else {
+			return self
+		}
+	}
+}
+
+
+1. エクステンションはメソッドやプロパティを他のクラスに追加している、そして、他のクラスに対するソースコードがなくても可能である。例えば、UIKitにあるクラスに追加できる。 
+UIButtonクラスにメソッドを追加することもできるし、上ではUIViewControllerにメソッドを追加した。このメソッドを追加すれば自分のアプリ全てから使用できるという言葉であり、す
+べてのViewControllerたちはもうこのメソッドを持っつようになる。
+
+2. もうContentViewControllerというメソッドの中に追加するけどViewControllerにcontentViewControllerが何か聞いて、もしNavigationControllerが正しけれ
+ば、visibleViewControllerを返還することだ。そして、もし異なるものであれば、selfを返還するはずselfが内容物(content)だから、それが正しいかどうであれ、意図した点を持
+ってくることができることになる。
