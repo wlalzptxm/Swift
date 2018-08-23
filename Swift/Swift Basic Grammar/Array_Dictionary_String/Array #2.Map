@@ -1,0 +1,6 @@
+Array #2.Map
+
+1. Mapはクルロジョを受けて,クルロジョはArrayの中にある各要素を別のものに変わることになって、IntになったArrayがの中、これをStringのArrayに変えたいなら、map { String ($0) }　に変えることができる、クルロジョが関数の最後の因子の時小括弧は入れても除いてもOKだ。
+
+map(transform: (T) -> U) -> [U]
+Let stringified: [String] = [1,2,3].map { String($0) }
