@@ -1,4 +1,4 @@
-Initialization #Customizing 
+Initialization #4.Customizing 
 
 1. もし私だけのinitを作り始めたら自動initは使ってはならない
 - 初期化が終わったら必ず,すべてのプロパティは値を持っていなければならない!
