@@ -1,0 +1,34 @@
+AnyObject #1.使い方
+
+1.AnyObjectを使用する方法は、我々が知っているタイプに変換してくれた時使用可能になる。変換しようとしたとき、そのタイプがない場合もあるから"as"というキーワードを書くように
+なるが、これは他のタイプに変換するのを"試み"する表現だ。言い換えれば、AnyObjectをどのようなタイプ'として、(as)'対しという意味だ(選択的)それで、これはいつもオプショナルに
+返還する
+
+Let ao: AnyObject = …
+If let foo = ao as? SomeClass {
+	// we can use foo and know that it is of type SomeClass in here
+}
+
+- asは普通"if let"と一緒に書くのに"as"がオプショナルを返還するから
+- AoというAnyObjectタイプの地域変数が一つあるが、私が知らないどんなクラス(SomeClass)に割り当てになる、でもaoがSomeClassなら使用しようと試みるのだaoはSomeClass
+かもしれないからSomeClassが合ったら、SomeClassでっかう。
+
+それで上の構文の通りに実行すれば、{}の中にAnyObjectがなくSomeClassタイプの地域変数fooが入るようになるという話。
+
+- 基本的にAnyObjectを特定したクラスで'キャスティング'することだ
+
+%Example
+
+@IBAction func touchDigit(sender : AnyObject) {
+	if let sendingButton = sender as? UIButton {
+		let digit = sendingButton.currentTitile!
+		…
+	} else if let sendingSlider = sender as? UISlider {
+	// digit定数にDoubleタイプであるsendingSlider値をIntに変えてそれをStringに変換したのを入れて与えることになる
+		let digit = String(Int(sendingSlider.value))
+		// sendingSlider.valueをintで包み隠し、それを再びStringでタイプキャスティング
+		…
+	}
+}
+
+- オプショナルを使用してif-let-else構文を作る。、これが基本的にAnyObjectを使用するための表現法だ。
