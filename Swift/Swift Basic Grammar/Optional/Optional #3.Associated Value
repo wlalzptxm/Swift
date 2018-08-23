@@ -1,0 +1,27 @@
+Optional #3.連関値にもたらす方法
+
+// x、オプショナルというのは、switchオプショナルという意味
+Var y =x!
+>
+// オプショナルを抽出して連関値をもたらす方法がswitchだから、
+Switch x {
+// somecaseにはletvalueをして連関値を持ってくるようにするのでyにその値を入れてあげる。
+	case Some(let value) : y = value
+// 割り当てられていないオプショナルを抽出することは衝突が出る。
+	case None :
+}
+
+
+
+If x: String? = …
+// xに条件を与えていながら
+If let y = x {
+	// do something with y
+}
+
+Switch x {
+//  Somecaseではあのy値を持ってきてyを使用するコードを入れてあげたら、if letがここで動作するようになる
+	case .Some(let y) :
+	case .None:
+		break
+}
