@@ -1,0 +1,29 @@
+Optional #2.チェーニング
+
+Var display : UILabel?
+If let lable = display {
+	if let text = label.text {
+		let x = text.hashValue
+		…
+	}
+}
+
+>
+
+If let x = display?.text?.hashValue { … }
+
+ディスプレーから値を探すのにもし、中間過程に一度でも求める値がないなら、全体的にnil値を返還すること。
+
+Let s: String?
+If s != nil {
+	display.text = s
+} else {
+	display.text = “ “
+}
+
+>
+
+Display.text = s ?? “ “
+
+- nilになりたくない、少なくとも空きスペースをおきたいとき。
+- ??この意味はsがnilがないなら、価格が抽出されて使用されるはず、そうでなければ" "を空いた空間に置くという意味
