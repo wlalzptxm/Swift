@@ -1,0 +1,10 @@
+AnyObject #4. NSUserDefaults
+
+Let defaults = NSUserDefaults.standardUserDefaults() // 共有されるインスタンスを生成するメソッド
+
+Let plist = defaults.objectForKey(“foo”)
+Defaults.setObject(plist, forKey: “foo”)
+
+- 特定のPropertyListを持って来るようにしてデータを修正するようになれば、自動的に保存になるが
+
+If !defaults.synchronize() {  強制的に保存する方法はあるが、失敗(ストレージが一杯になるとき)どうなるか知らない }
