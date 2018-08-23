@@ -1,0 +1,16 @@
+AnyObject #5.Casting
+
+1. 一旦はキャスティングはAnyObjectだけに使われているわけではない、どんなクラスの子クラスが一つがあったらasを使用してキャスティングして見ることができる。子クラスであるかど
+うかはっきりしないクラスでキャスティングすることができ、asが代わりに子クラスであるかどうか話してくれるだろう
+
+Let vc : UIViewController = CalulatorViewControlloer()
+
+- UIViewControllerの基本クラスのvcがあるなら、vc.displayValueとしても出来ない、なぜならdisplayValueはCalculatorBrainのだからです、しかし、ここにasを入れ
+ると
+
+If let clacVC = vc as? CalculatorViewController {
+	let x = calcVC.displayVlaue 
+}
+
+- vcにasCalculatorBrainとキャスティングをしたらその時はdisplayValueにアプローチすることになるという意味だ。だからasはAnyObjectのほかにも使われるようになるとな
+る、そして、ここでもas!でキャスティングを強制できるが、キャスティングが不可能な場合ならアプリが衝突(crash)となる。
