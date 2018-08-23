@@ -1,0 +1,24 @@
+Optional #1.基礎の構文
+
+An Optional is just an enum
+
+	enum Optional<T> {
+		case None
+		case	 Some(T)
+	} 
+
+- オプショナルの基本形はこうだ
+
+Let x: String? = …
+If let y = x {
+	// do something with y
+}
+
+Somecaseでyの値を持ってきて、とにかく基本的に?オプショナルはenumをもとにnoneとsomeが共存している、ためスイッチ構文に分けられることができる。
+
+Switch x {
+	case .Some(let y) :
+	//do something with y
+	case .Nome:
+		break
+}
