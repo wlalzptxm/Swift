@@ -1,0 +1,16 @@
+Range #0.基礎
+
+// RangeはArrayのように一般化(ジェネリック)されたタイプ
+Struct Range<T> {
+	var startIndex: T
+	var endIndex: T
+}
+
+ -  ArrayはIntタイプに要素が区別される
+ -  Range(Int)とRange(String.Index)は、べっ
+
+Let array = [“a”.,”b”,”c”,’d”]
+Let subArray1 = array[2…3]
+Let subArray2 = array[2..<3]
+For i in 27…104 { } 
+ -  for文で特異点をよく考えること
