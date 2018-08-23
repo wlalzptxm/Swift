@@ -1,0 +1,49 @@
+Methods #1.基礎(Parameters Names)
+
+All parameters to all functions have an internal name and an external name
+
+Func foo(externalFirst FIRST : int, externalSecond SECOND : Double) {
+	var sum = 0.0
+	fot _ in 0..< FIRST { sum += SECOND }
+}
+
+func bar() {
+	let result = foo(externalFirst: 123, externalSecond: 5.5) }
+
+1. 全てのパラメータにはinternal(内部)parameterとexternal(外部)parameterが存在する、そして常に外部名前が先に来て内部名がその次にくる。内部名はメソッド内部で使用
+されるローカル変数の名だけど
+
+- 例えば上のfooメソッドのFIRST、SECONDがそれです。
+- そして当然なことに、メソッドを呼び出すときに使用することではない
+
+2. 外部名は、このメソッドを呼び出す時、呼び出しする人が利用する名前だ。
+
+- 例えば、barメソッドの中にfoo(externalFirst、externalSecondのように呼び出すとき使われるようになって
+- 値を割り当てる時、やはりこの名前で使用されて負うことになる:123、:5.5のように
+
+3. それでFIRSTとSECONDと一緒に内部名が目には見えないが、実行段階では継続して使われるようになるというそれがまさに'internal(内部的)'という実質的な意味
+
+4. _アンダーバーはexternal名前を使用したくないときに使用することになって(例えば、_senderのように)最初のピラミトには_アンダーバーが基本的に設定されている。もし
+external名前を設定していないのなら基本の値とinternal名前になる
+
+// Func foo( FIRST : int, externalSecond SECOND : Double) {  <- 기본설정
+Func foo(_ FIRST : int, externalSecond SECOND : Double) {
+	var sum = 0.0
+	fot _ in 0..< FIRST { sum += SECOND }
+}
+
+func bar() {
+	let result = foo(123, externalSecond: 5.5) }
+
+- このように_アンダーバーを使用してexternal名前を省略することができる。
+- これがデフォルト値にスイフトに設定されている
+
+5. 基本的に外部名を設定しなければ、内部名がデフォルト値として設定されるようになる、できればデフォルト値として行こう。
+
+Func foo(FIRST : Int, SECOND : Double) {
+	var sum = 0.0
+	fot _ in 0..< FIRST { sum += SECOND }
+}
+
+func bar() {
+	let result = foo(123, SECOND: 5.5) }
