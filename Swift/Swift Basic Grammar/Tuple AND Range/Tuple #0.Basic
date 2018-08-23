@@ -1,0 +1,19 @@
+Tuples #0.基礎の構文
+
+Let x: (String, int, Double) = (“hello”, 5, 0.86)
+
+// ローカル変数3つのidを作ってxに割り当てる方法
+Let (word, number, value) =x
+Print(word) //hello
+Print(number) //5
+Print(value) //0.0876
+
+Let x: (w: String, i: int, v: Double) = (“hello”, 5, 0.86)
+
+// タプルを新たに作る時、それぞれ名前を決めてできる。
+Print(x.w) //hello
+Print(x.i) //5
+Print(x.v) //0.0876
+
+// 可能ですが、こうなると、w、i、vを無視して上のように使用される
+Let (word, num. val) = x
