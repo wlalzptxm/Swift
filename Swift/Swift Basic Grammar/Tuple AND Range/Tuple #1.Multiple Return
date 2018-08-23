@@ -1,0 +1,10 @@
+Tuple #1.マルチプル・返還
+
+// 返還タイプに使えることができる
+ Func getSize() -> (weight : Double, height : Double) {
+	return (250, 80) }
+
+Let x = getSize()
+print(“weight is \(x.weight)”) // weght is 250
+> or
+print(“height is \(getSize().heght)”) // heitht is 80
