@@ -1,0 +1,28 @@
+class, struct, enum #類似点
+
+1. 定義方法が全部同じ
+
+Class CalculatorBrain { }
+Struct Vertex { }
+Enum Op { }
+
+2. すべてプロパティと関数を持つことができる
+
+Func doit(argument: Type) -> ReturnValue { }
+
+//  enumは、保存プロパティを持つことはできないが、計算プロパティはなる
+- enumが記憶している貯蔵所はcaseで関連の値が存在する、実際にそれがenumの貯蔵所となる。
+
+Var storedProperty = <initial value> (not enum)
+
+Var computedProperty : Type {
+	get { }
+	set { }
+}
+
+3. 全てinitializer(初期化関数)を持つことができる
+
+// enumはただ、初期化関数が必要ない
+- なぜなら、関連値を区別される値に割り当てをしてくれたから。
+
+init(argument1 : Type, argument2: Type, …) { }
